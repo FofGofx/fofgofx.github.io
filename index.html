@@ -6,14 +6,16 @@
   <meta name="description" content="Guoxin Fan (范国鑫) is a master's student at ICT, CAS interested in efficient machine learning and accelerating generative models.">
   <title>Guoxin Fan 范国鑫 | Academic Homepage</title>
   <link rel="icon" href="assets/guoxin-fan.jpg">
-  <link rel="stylesheet" href="style.css?v=academic-2">
+  <link rel="stylesheet" href="style.css?v=academic-3">
 </head>
 <body id="top">
   <a class="skip" href="#about">Skip to content</a>
   <header><nav aria-label="Page sections">
     <a class="home" href="#top">Homepage</a>
-    <div class="anchors">
-      <a href="#about">About Me</a><a href="#news">News</a><a href="#publications">Publications</a>
+    <a href="#about">About Me</a><a href="#news">News</a>
+    <button class="menu-toggle" hidden aria-controls="more-sections" aria-expanded="false" aria-label="More sections">☰</button>
+    <div class="anchors" id="more-sections">
+      <a href="#publications">Publications</a>
       <a href="#honors">Honors and Awards</a><a href="#education">Education</a><a href="#services">Services</a>
     </div>
   </nav></header>
@@ -24,9 +26,9 @@
       <p class="role">Institute of Computing Technology, Chinese Academy of Sciences (ICT, CAS)</p>
       <p class="location">Beijing, China</p></div>
       <div class="contact">
-        <a href="mailto:fanguoxin26s@ict.ac.cn">fanguoxin26s@ict.ac.cn</a>
-        <a href="https://github.com/FofGofx">GitHub · FofGofx</a>
-        <a href="https://orcid.org/0009-0005-2821-3483">ORCID · 0009-0005-2821-3483</a>
+        <a href="mailto:fanguoxin26s@ict.ac.cn" title="fanguoxin26s@ict.ac.cn">Email<span> · fanguoxin26s@ict.ac.cn</span></a>
+        <a href="https://github.com/FofGofx" title="FofGofx on GitHub">GitHub</a>
+        <a href="https://orcid.org/0009-0005-2821-3483" title="ORCID 0009-0005-2821-3483">ORCID<span> · 0009-0005-2821-3483</span></a>
       </div>
     </aside>
     <main>
@@ -59,14 +61,42 @@
       </section>
       <section id="education">
         <h2><span aria-hidden="true">📖</span> Education</h2>
-        <div class="entry"><div class="date">Sep 2026 – Present</div><p><strong>Institute of Computing Technology, Chinese Academy of Sciences</strong><br>Master’s student in <em>Computer Science and Technology</em></p></div>
-        <div class="entry"><div class="date">Sep 2022 – Jul 2026</div><p><strong>Fuzhou University</strong><br>Bachelor of Engineering in <em>Computer Science and Technology</em></p></div>
+        <ul class="degrees">
+          <li><p><em>2026.09 – Present</em> &nbsp; <strong>Institute of Computing Technology, Chinese Academy of Sciences</strong></p>
+            <p>Master’s student in <em>Computer Science and Technology</em></p></li>
+          <li><p><em>2022.09 – 2026.07</em> &nbsp; <strong>Fuzhou University</strong></p>
+            <p>Bachelor of Engineering in <em>Computer Science and Technology</em></p></li>
+        </ul>
       </section>
       <section id="services">
         <h2><span aria-hidden="true">💼</span> Services</h2>
-        <div class="entry"><div class="date">2025, 2026</div><p><strong>Reviewer</strong>, AAAI Conference on Artificial Intelligence</p></div>
+        <p>Reviewer</p>
+        <ul><li>AAAI Conference on Artificial Intelligence, 2025 and 2026</li></ul>
       </section>
     </main>
   </div>
+  <script>
+    const nav = document.querySelector('nav');
+    const toggle = nav.querySelector('.menu-toggle');
+    const links = document.getElementById('more-sections');
+    const compact = window.matchMedia('(max-width: 44em)');
+    function showMenu(open) {
+      toggle.hidden = !compact.matches;
+      toggle.setAttribute('aria-expanded', String(open && compact.matches));
+      links.hidden = compact.matches && !open;
+    }
+    compact.addEventListener('change', () => showMenu(false));
+    toggle.addEventListener('click', () => showMenu(links.hidden));
+    document.addEventListener('click', event => {
+      if (!nav.contains(event.target) || event.target.closest('nav a')) showMenu(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        showMenu(false);
+        toggle.focus();
+      }
+    });
+    showMenu(false);
+  </script>
 </body>
 </html>
